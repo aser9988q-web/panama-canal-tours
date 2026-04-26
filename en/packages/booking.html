@@ -3,650 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Booking Panama Canal [Partial Transit] boat tour | Panama Canal Tours</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Booking Page - Panama Canal Tours</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .site-header {
-            background: white;
-            padding: 15px 20px;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #003d7a;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            color: #003d7a;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: #00a8e8;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .page-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #003d7a;
-            margin: 30px 0 20px 0;
-            text-align: left;
-        }
-
-        .go-back-btn {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            color: #003d7a;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .go-back-btn:hover {
-            background: #f9f9f9;
-            border-color: #003d7a;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 20px 0;
-        }
-
-        .booking-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .booking-info {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #e0f7ff;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .info-item i {
-            color: #00a8e8;
-            font-size: 18px;
-            min-width: 20px;
-        }
-
-        .whatsapp-btn {
-            width: 100%;
-            padding: 12px;
-            background: #25d366;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-
-        .whatsapp-btn:hover {
-            background: #1fa857;
-        }
-
-        .booking-table {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        .pure-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
-        }
-
-        .pure-table thead {
-            background: #003d7a;
-            color: white;
-        }
-
-        .pure-table th {
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .pure-table td {
-            padding: 12px 15px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
-
-        .pure-table tbody tr:hover {
-            background: #f9f9f9;
-        }
-
-        .pure-table tfoot {
-            background: #f5f5f5;
-            font-weight: bold;
-            color: #003d7a;
-        }
-
-        .pure-table tfoot td {
-            padding: 15px;
-            border-top: 2px solid #003d7a;
-        }
-
-        .text-left {
-            text-align: left;
-        }
-
-        .small {
-            font-size: 12px;
-        }
-
-        .payment-info {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 16px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
             color: #333;
         }
-
-        .payment-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 30px;
+        
+        header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ccc;
         }
-
-        .payment-btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            color: white;
-            min-width: 140px;
-            justify-content: center;
-        }
-
-        .payment-btn i {
-            font-size: 16px;
-        }
-
-        .payment-btn.visa {
-            background: #262626;
-            color: white;
-        }
-
-        .payment-btn.visa:hover {
-            background: #1a1a1a;
-        }
-
-        .payment-btn.paypal {
-            background: #FFD700;
+        
+        header h1 {
+            font-size: 24px;
             color: #000;
         }
-
-        .payment-btn.paypal:hover {
-            background: #FFC700;
+        
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
-
-        .payment-btn.tether {
-            background: #50AF95;
-            color: white;
-        }
-
-        .payment-btn.tether:hover {
-            background: #3d9078;
-        }
-
-        .payment-btn.usdc {
-            background: #2775CA;
-            color: white;
-        }
-
-        .payment-btn.usdc:hover {
-            background: #1f5aa0;
-        }
-
-        .payment-btn.yappy {
-            background: #013685;
-            color: white;
-        }
-
-        .payment-btn.yappy:hover {
-            background: #002555;
-        }
-
-        .payment-btn.estimate {
-            background: #ccc;
-            color: #444;
-        }
-
-        .payment-btn.estimate:hover {
-            background: #bbb;
-        }
-
-        .payment-btn.disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .payment-btn.disabled:hover {
-            background: inherit;
-        }
-
-        .form-section {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+        .booking-header {
+            background-color: #f0f8ff;
+            padding: 20px;
             margin-bottom: 20px;
+            border-radius: 5px;
+            position: relative;
         }
-
-        .form-section h3 {
-            color: #003d7a;
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #00a8e8;
+        
+        .booking-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
         }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+        
+        .go-back-btn {
+            background-color: #d32f2f;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            float: right;
+            text-decoration: none;
+            display: inline-block;
         }
-
-        .form-row.full {
-            grid-template-columns: 1fr;
+        
+        .go-back-btn:hover {
+            background-color: #b71c1c;
         }
-
-        .form-group {
+        
+        .clear {
+            clear: both;
+        }
+        
+        .trip-info {
+            background-color: #7dd3d3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
         }
-
+        
+        .location-bar {
+            background-color: #7dd3d3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #1eaa51;
+        }
+        
+        .booking-summary {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .summary-table th {
+            background-color: #003d7a;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .summary-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .included {
+            padding: 15px;
+            background-color: #f0f8ff;
+            margin: 10px 0;
+            border-left: 4px solid #25d366;
+        }
+        
+        .not-included {
+            padding: 15px;
+            background-color: #fff0f0;
+            margin: 10px 0;
+            border-left: 4px solid #ff4444;
+        }
+        
+        .total-amount {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f8ff;
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .payment-text {
+            font-size: 16px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+        }
+        
+        .payment-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .payment-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .payment-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .visa-btn {
+            background-color: #000;
+            color: white;
+        }
+        
+        .paypal-btn {
+            background-color: #ffc439;
+            color: black;
+        }
+        
+        .tether-btn {
+            background-color: #26a17b;
+            color: white;
+        }
+        
+        .usdc-btn {
+            background-color: #2775ca;
+            color: white;
+        }
+        
+        .yappy-btn {
+            background-color: #003d7a;
+            color: white;
+        }
+        
+        .estimate-btn {
+            background-color: #999;
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
         .form-group label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 8px;
-            font-size: 14px;
         }
-
+        
         .form-group input,
         .form-group select {
+            width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.3s;
         }
-
+        
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #003d7a;
-            box-shadow: 0 0 0 3px rgba(0, 61, 122, 0.1);
+            box-shadow: 0 0 5px rgba(0, 61, 122, 0.3);
         }
-
-        .alert {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .alert-warning {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            color: #856404;
-        }
-
+        
         .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: #003d7a;
+            background-color: #003d7a;
             color: white;
+            padding: 12px 30px;
             border: none;
             border-radius: 5px;
             font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #002847;
+        }
+        
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
         }
-
-        .submit-btn:hover {
-            background: #002a5c;
+        
+        .close-modal:hover {
+            color: #000;
         }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
+        
+        .unavailable-msg {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
         }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            cursor: pointer;
-        }
-
-        .checkbox-group label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: normal;
-        }
-
+        
         @media (max-width: 768px) {
-            .booking-container {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
             .payment-buttons {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
-
-            .payment-btn {
-                width: 100%;
-            }
-
-            .page-title {
+            
+            .booking-title {
                 font-size: 24px;
             }
-
-            .nav-menu {
-                gap: 15px;
+            
+            .total-amount {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="site-header">
-        <div class="header-content">
-            <div class="logo">🌟 PANAMA CANAL TOURS</div>
-            <ul class="nav-menu">
-                <li><a href="/">HOME</a></li>
-                <li><a href="/">BOAT TOURS</a></li>
-                <li><a href="/">GUIDED TOURS</a></li>
-                <li><a href="/">AIR TOURS</a></li>
-                <li><a href="/">CONTACT</a></li>
-            </ul>
+    <header>
+        <h1>PANAMA CANAL TOURS</h1>
+    </header>
+    
+    <div class="container">
+        <div class="booking-header">
+            <div class="booking-title">Booking Page:<br>Panama Canal [Partial Transit] boat tour</div>
+            <a href="javascript:history.back()" class="go-back-btn">← Go back</a>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="trip-info">
+            ⏱️ 6 hours
+        </div>
+        
+        <div class="trip-info">
+            📅 <span id="trip-date">May 30, 2026</span>
+        </div>
+        
+        <div class="location-bar">
+            📍 Flamenco Marina, Amador, Panama City
+        </div>
+        
+        <button class="whatsapp-btn" onclick="window.open('https://wa.me/+507644007600', '_blank')">
+            💬 Support via Whatsapp
+        </button>
+        
+        <div class="booking-summary">
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Adults: <strong id="adults-count">4</strong></td>
+                        <td>$<strong id="adults-subtotal">720.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Children 0 - 2 years old: <strong id="children-free-count">1</strong></td>
+                        <td><strong>0.00</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Children 3 - 12 years old: <strong id="children-count">3</strong></td>
+                        <td>$<strong id="children-subtotal">375.00</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="included">
+                <strong>✓ Included:</strong> Guide and ✓ Lunch
+            </div>
+            
+            <div class="not-included">
+                <strong>✗ Not Included:</strong> Ground transport to the meeting point
+            </div>
+            
+            <div class="total-amount">
+                Total $<span id="total-amount">1,095.00</span> USD
+            </div>
+        </div>
+        
+        <div class="payment-text">
+            Pay ($<span id="payment-total">1,095.00</span> USD) with Mastercard, Visa, Paypal, Tether (USDT), USD Coin (USDC), Yappy or request an estimate.
+        </div>
+        
+        <div class="payment-buttons">
+            <button class="payment-btn visa-btn" onclick="openPaymentModal('visa')">
+                🛒 Mastercard or Visa
+            </button>
+            <button class="payment-btn paypal-btn" onclick="showUnavailable()">
+                🛒 PayPal
+            </button>
+            <button class="payment-btn tether-btn" onclick="showUnavailable()">
+                ₮ Tether (USDT)
+            </button>
+            <button class="payment-btn usdc-btn" onclick="showUnavailable()">
+                💵 USD Coin (USDC)
+            </button>
+            <button class="payment-btn yappy-btn" onclick="showUnavailable()">
+                📱 Yappy
+            </button>
+            <button class="payment-btn estimate-btn" onclick="requestEstimate()">
+                ✉️ request an estimate
+            </button>
+        </div>
+        
+        <div class="unavailable-msg" id="unavailableMsg">
+            This payment method is not available at the moment. Please use Mastercard or Visa.
         </div>
     </div>
-
-    <div class="container">
-        <!-- Go Back Button -->
-        <a href="javascript:history.back()" class="go-back-btn">
-            <i class="fas fa-arrow-left"></i> Go back
-        </a>
-
-        <hr/>
-
-        <!-- Page Title -->
-        <h1 class="page-title">Booking Page: Panama Canal [Partial Transit] boat tour</h1>
-
-        <hr/>
-
-        <!-- Main Booking Section -->
-        <div class="booking-container">
-            <!-- Left Column: Trip Info -->
-            <div class="booking-info">
-                <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <span><strong>6 hours</strong></span>
+    
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+            <h2>Complete Your Payment</h2>
+            <form onsubmit="submitPayment(event)">
+                <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" required>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-calendar"></i>
-                    <span><strong id="trip-date">May 30, 2026</strong></span>
+                <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" required>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span><strong>Flamenco Marina, Amador, Panama City</strong></span>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
                 </div>
-                <button class="whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> Support via Whatsapp
-                </button>
-            </div>
-
-            <!-- Right Column: Booking Table -->
-            <div class="booking-table">
-                <table class="pure-table pure-table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Prices Per Person</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Adults: <strong id="adults-count">3</strong></td>
-                            <td>$180.00</td>
-                            <td id="adults-subtotal">$540.00</td>
-                        </tr>
-                        <tr>
-                            <td>Children 0 - 2 years old: <strong id="children-free-count">1</strong></td>
-                            <td>0.00</td>
-                            <td>0.00</td>
-                        </tr>
-                        <tr>
-                            <td>Children 3 - 12 years old: <strong id="children-discount-count">3</strong></td>
-                            <td>$125.00</td>
-                            <td id="children-subtotal">$375.00</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="text-left small">
-                                <strong>Included:</strong> ✅ Guide and ✅ Lunch
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="text-left small">
-                                <strong>Not Included:</strong> ❌ Ground transport to the meeting point
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3">
-                                Total <span id="total-amount">$915.00</span> USD
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <hr/>
-
-        <!-- Payment Info -->
-        <div class="payment-info">
-            Pay ($<span id="payment-total">915.00</span> USD) with Mastercard, Visa, Paypal, Tether (USDT), USD Coin (USDC), Yappy or request an estimate.
-        </div>
-
-        <!-- Payment Buttons -->
-        <div class="payment-buttons">
-            <button class="payment-btn visa" onclick="selectPayment('visa')">
-                <i class="fas fa-credit-card"></i> Mastercard or Visa
-            </button>
-            <button class="payment-btn paypal disabled" onclick="showUnavailable()">
-                <i class="fab fa-paypal"></i> Paypal
-            </button>
-            <button class="payment-btn tether disabled" onclick="showUnavailable()">
-                <i class="fas fa-coins"></i> Tether (USDT)
-            </button>
-            <button class="payment-btn usdc disabled" onclick="showUnavailable()">
-                <i class="fas fa-circle-dollar-to-slot"></i> USD Coin (USDC)
-            </button>
-            <button class="payment-btn yappy disabled" onclick="showUnavailable()">
-                <i class="fas fa-mobile-screen"></i> Yappy
-            </button>
-            <button class="payment-btn estimate" onclick="requestEstimate()">
-                <i class="fas fa-envelope"></i> request an estimate
-            </button>
-        </div>
-
-        <!-- Payment Form -->
-        <form id="payment-form" onsubmit="handlePaymentSubmit(event)">
-            <!-- Contact Details Section -->
-            <div class="form-section">
-                <h3>Contact Details</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstName">Name</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" required>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="repeatEmail">Repeat Email</label>
-                        <input type="email" id="repeatEmail" name="repeatEmail" required>
-                    </div>
+                <div class="form-group">
+                    <label for="cardNumber">Card Number *</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
                 </div>
-                <div class="form-row">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Billing Address Section -->
-            <div class="form-section">
-                <h3>Billing Address</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="country">Country</label>
-                        <select id="country" name="country" required>
-                            <option value="">-- Select Country --</option>
-                            <option value="panama">Panama</option>
-                            <option value="usa">United States</option>
-                            <option value="canada">Canada</option>
-                            <option value="mexico">Mexico</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" name="city" required>
-                    </div>
-                </div>
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" id="address" name="address" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card Details Section -->
-            <div class="form-section">
-                <h3>Card Details</h3>
-                <div class="alert alert-warning">
-                    <strong>Important:</strong> The cardholder must be the person who makes the purchase or reservation and must participate in its use, either individually or as part of a group.
-                </div>
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="expMonth">Expiration Month</label>
-                        <select id="expMonth" name="expMonth" required>
+                        <label for="expMonth">Exp Month *</label>
+                        <select id="expMonth" required>
                             <option value="">-- Month --</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -663,8 +480,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="expYear">Expiration Year</label>
-                        <select id="expYear" name="expYear" required>
+                        <label for="expYear">Exp Year *</label>
+                        <select id="expYear" required>
                             <option value="">-- Year --</option>
                             <option value="2026">2026</option>
                             <option value="2027">2027</option>
@@ -674,108 +491,89 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
-                    </div>
+                <div class="form-group">
+                    <label for="cvv">CVV *</label>
+                    <input type="text" id="cvv" placeholder="123" required>
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to the Terms & Conditions</label>
-                </div>
-                <button type="submit" class="submit-btn">
-                    Proceed
-                </button>
-            </div>
-        </form>
+                <button type="submit" class="submit-btn">Complete Payment</button>
+            </form>
+        </div>
     </div>
-
+    
     <script>
-        // Get booking details from URL parameters
-        function getUrlParameter(name) {
-            const url = new URL(window.location);
-            return url.searchParams.get(name);
-        }
-
-        // Initialize page with booking details
-        function initializeBooking() {
-            const pax_regular = parseInt(getUrlParameter('pax_regular')) || 1;
-            const pax_discount = parseInt(getUrlParameter('pax_discount')) || 0;
-            const pax_free = parseInt(getUrlParameter('pax_free')) || 0;
-            const booking_date = getUrlParameter('booking_date');
-
-            // Update counts
-            document.getElementById('adults-count').textContent = pax_regular;
-            document.getElementById('children-discount-count').textContent = pax_discount;
-            document.getElementById('children-free-count').textContent = pax_free;
-
-            // Calculate totals
-            const adultsPrice = 180;
-            const childrenPrice = 125;
-
-            const adultsSubtotal = pax_regular * adultsPrice;
-            const childrenSubtotal = pax_discount * childrenPrice;
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const adults = parseInt(params.get('pax_regular')) || 4;
+        const children = parseInt(params.get('pax_discount')) || 3;
+        const childrenFree = parseInt(params.get('pax_free')) || 1;
+        const bookingDate = params.get('booking_date') || '2026-05-30';
+        
+        // Prices
+        const adultPrice = 180;
+        const childPrice = 125;
+        
+        // Update page with booking data
+        function updateBookingData() {
+            document.getElementById('adults-count').textContent = adults;
+            document.getElementById('children-count').textContent = children;
+            document.getElementById('children-free-count').textContent = childrenFree;
+            
+            const adultsSubtotal = adults * adultPrice;
+            const childrenSubtotal = children * childPrice;
             const total = adultsSubtotal + childrenSubtotal;
-
-            document.getElementById('adults-subtotal').textContent = '$' + adultsSubtotal.toFixed(2);
-            document.getElementById('children-subtotal').textContent = '$' + childrenSubtotal.toFixed(2);
-            document.getElementById('total-amount').textContent = '$' + total.toFixed(2);
-            document.getElementById('payment-total').textContent = total.toFixed(2);
-
+            
+            document.getElementById('adults-subtotal').textContent = adultsSubtotal.toFixed(2);
+            document.getElementById('children-subtotal').textContent = childrenSubtotal.toFixed(2);
+            document.getElementById('total-amount').textContent = total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('payment-total').textContent = total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
             // Format date
-            if (booking_date) {
-                const date = new Date(booking_date);
-                const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('trip-date').textContent = date.toLocaleDateString('en-US', options);
-            }
+            const dateObj = new Date(bookingDate);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('trip-date').textContent = dateObj.toLocaleDateString('en-US', options);
         }
-
-        // Select payment method
-        function selectPayment(method) {
+        
+        function openPaymentModal(method) {
             if (method === 'visa') {
-                alert('Proceeding with Visa/Mastercard payment...');
+                document.getElementById('paymentModal').style.display = 'block';
             }
         }
-
-        // Show unavailable message
+        
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+        
         function showUnavailable() {
-            alert('This payment method is not available at the moment. Please use Visa/Mastercard.');
+            const msg = document.getElementById('unavailableMsg');
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 3000);
         }
-
-        // Request estimate
+        
         function requestEstimate() {
-            alert('Thank you for your interest! We will send you an estimate shortly.');
-        }
-
-        // Handle form submission
-        function handlePaymentSubmit(event) {
-            event.preventDefault();
-
-            // Validate form
-            const form = document.getElementById('payment-form');
-            if (!form.checkValidity()) {
-                alert('Please fill in all required fields');
-                return;
+            const email = prompt('Please enter your email address:');
+            if (email) {
+                alert('Thank you! We will send you an estimate to ' + email);
             }
-
-            // Show success message
-            alert('Payment processed successfully! Your booking has been confirmed.');
-
-            // Log data
-            console.log('Payment submitted:', {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                country: document.getElementById('country').value,
-                city: document.getElementById('city').value,
-                address: document.getElementById('address').value,
-            });
         }
-
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', initializeBooking);
+        
+        function submitPayment(event) {
+            event.preventDefault();
+            alert('Payment submitted successfully! Your booking is confirmed.');
+            closePaymentModal();
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Initialize
+        updateBookingData();
     </script>
 </body>
 </html>
