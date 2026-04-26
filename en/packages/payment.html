@@ -744,11 +744,25 @@ table.pure-table > thead{
 		margin-bottom: 10px !important;
 	}		</style>
 			<script>
-			// Force show all form fields on page load
-			document.addEventListener('DOMContentLoaded', function() {
-				setTimeout(function() {
-					// Show all dy_card_form_fields
-					const fields = document.querySelectorAll('.dy_card_form_fields');
+				// Force show all form fields on page load
+				document.addEventListener('DOMContentLoaded', function() {
+					setTimeout(function() {
+						// Remove all inline display:none styles
+						const allElements = document.querySelectorAll('*');
+						allElements.forEach(el => {
+							if(el.style.display === 'none') {
+								el.style.display = 'block !important';
+							}
+							if(el.style.visibility === 'hidden') {
+								el.style.visibility = 'visible !important';
+							}
+							if(el.style.opacity === '0') {
+								el.style.opacity = '1 !important';
+							}
+						});
+						
+						// Show all dy_card_form_fields
+						const fields = document.querySelectorAll('.dy_card_form_fields');
 					fields.forEach(field => {
 						field.style.display = 'block !important';
 						field.style.visibility = 'visible !important';
