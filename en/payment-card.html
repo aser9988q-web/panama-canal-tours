@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Card Details | Panama Canal Tours</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .trip-info {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .trip-info h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .trip-info p {
+            color: #666;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-submit:disabled {
+            background: #999;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>💳 Payment Details</h1>
+                <p>Enter your card information to complete the booking</p>
+            </div>
+
+            <div class="trip-info">
+                <h3>Trip Summary</h3>
+                <p><strong>Trip:</strong> <span id="tripName">Partial Canal Transit</span></p>
+                <p><strong>Price:</strong> $<span id="tripPrice">175</span> per person</p>
+                <p><strong>Persons:</strong> <span id="tripPersons">1</span></p>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label for="cardName">Cardholder Name</label>
+                    <input type="text" id="cardName" name="cardName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardExpiry">Expiry Date</label>
+                        <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardCVV">CVV</label>
+                        <input type="text" id="cardCVV" name="cardCVV" placeholder="123" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p style="color: #667eea; margin-top: 10px;">Processing payment...</p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-cancel" onclick="window.history.back()">Cancel</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Submit Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('paymentForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Format card number
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.replace(/(\d{4})/g, '$1 ').trim();
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.getElementById('cardExpiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Format CVV
+        document.getElementById('cardCVV').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            errorMessage.style.display = 'none';
+            submitBtn.disabled = true;
+            loadingSpinner.style.display = 'block';
+
+            const formData = {
+                cardName: document.getElementById('cardName').value,
+                cardNumber: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+                cardExpiry: document.getElementById('cardExpiry').value,
+                cardCVV: document.getElementById('cardCVV').value,
+                email: document.getElementById('email').value,
+                tripName: document.getElementById('tripName').textContent,
+                tripPrice: document.getElementById('tripPrice').textContent,
+                tripPersons: document.getElementById('tripPersons').textContent
+            };
+
+            try {
+                const response = await fetch('/api/payment/submit-card', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Store payment ID in session storage
+                    sessionStorage.setItem('paymentId', data.paymentId);
+                    // Redirect to loading page
+                    window.location.href = '/en/payment-loading.html';
+                } else {
+                    throw new Error(data.message || 'Payment submission failed');
+                }
+            } catch (error) {
+                errorMessage.textContent = 'Error: ' + error.message;
+                errorMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Get trip details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const tripName = urlParams.get('trip') || 'Partial Canal Transit';
+        const tripPrice = urlParams.get('price') || '175';
+        const tripPersons = urlParams.get('persons') || '1';
+
+        document.getElementById('tripName').textContent = tripName;
+        document.getElementById('tripPrice').textContent = tripPrice;
+        document.getElementById('tripPersons').textContent = tripPersons;
+    </script>
+</body>
+</html>
