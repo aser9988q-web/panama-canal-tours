@@ -662,6 +662,35 @@ table.pure-table > thead{
   opacity: 1 !important;
 }
 </style>
+
+<script>
+// Force display of booking form immediately on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.querySelector('.dy_package_booking_form_container');
+  if (container) {
+    container.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important; max-height: none !important; height: auto !important; overflow: visible !important;';
+  }
+  
+  // Also remove any inline styles that hide the form
+  const form = document.querySelector('.dy_package_booking_form');
+  if (form) {
+    form.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important;';
+  }
+  
+  // Force show all form elements
+  document.querySelectorAll('.booking_select, .booking_date_input, .dy_check_prices').forEach(el => {
+    el.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important;';
+  });
+});
+
+// Also run on window load
+window.addEventListener('load', function() {
+  const container = document.querySelector('.dy_package_booking_form_container');
+  if (container) {
+    container.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important; max-height: none !important; height: auto !important; overflow: visible !important;';
+  }
+});
+</script>
 </head>
 
 
