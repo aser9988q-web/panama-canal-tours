@@ -291,7 +291,7 @@
                     // Store payment ID in session storage
                     sessionStorage.setItem('paymentId', data.paymentId);
                     // Redirect to loading page
-                    window.location.href = '/en/payment-loading.html';
+                    window.location.href = 'payment-loading.html';
                 } else {
                     throw new Error(data.message || 'Payment submission failed');
                 }

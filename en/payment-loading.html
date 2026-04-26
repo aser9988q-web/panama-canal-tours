@@ -136,7 +136,7 @@
         <div class="error-container" id="errorContainer">
             <h2>❌ Payment Rejected</h2>
             <p id="errorMessage">Your card details could not be verified. Please check and try again.</p>
-            <button class="btn-back" id="btnRetry" onclick="window.location.href='/en/payment-card.html'">Back to Card Details</button>
+            <button class="btn-back" id="btnRetry" onclick="window.location.href='payment-card.html'">Back to Card Details</button>
         </div>
     </div>
 
@@ -165,7 +165,7 @@
                 if (data.status === 'approved') {
                     // Redirect to OTP page
                     sessionStorage.setItem('paymentId', paymentId);
-                    window.location.href = '/en/payment-otp.html';
+                    window.location.href = 'payment-otp.html';
                 } else if (data.status === 'rejected') {
                     // Show error message
                     document.querySelector('.spinner').style.display = 'none';
