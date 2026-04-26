@@ -679,6 +679,24 @@ table.pure-table > thead{
 
 .dy_package .dy_title_h3 > h3 a {
 		color: #005293
+	}
+	
+	/* Override disabled state */
+	input:disabled, select:disabled, textarea:disabled {
+		pointer-events: auto !important;
+		cursor: text !important;
+		opacity: 1 !important;
+		background-color: white !important;
+		color: #333 !important;
+	}
+	
+	/* Make form fields editable */
+	input[disabled], select[disabled], textarea[disabled] {
+		pointer-events: auto !important;
+		cursor: text !important;
+		opacity: 1 !important;
+		background-color: white !important;
+		color: #333 !important;
 	}		</style>
 			<script>
 			// Force show all form fields on page load
