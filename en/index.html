@@ -88,19 +88,31 @@
 							/* Fix for button layout */
 							.fl-col-group-nested {
 								display: flex;
+								flex-direction: column;
 								flex-wrap: wrap;
 								justify-content: center;
-								gap: 20px;
+								gap: 15px;
 								align-items: center;
 							}
 							.fl-col-small {
 								flex: 0 1 auto;
-								min-width: 200px;
+								width: 100%;
+								max-width: 400px;
 							}
 							.pure-button {
 								width: 100%;
 								padding: 15px 20px !important;
 								font-size: 16px;
+							}
+							/* Desktop layout */
+							@media (min-width: 768px) {
+								.fl-col-group-nested {
+									flex-direction: row;
+								}
+								.fl-col-small {
+									width: auto;
+									min-width: 200px;
+								}
 							}
 						</style>
 				<title>Panama Canal Tours | Tour and Day Trips at the Panama Canal</title>
