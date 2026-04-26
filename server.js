@@ -72,6 +72,52 @@ async function initializeDatabase() {
 
 // Routes
 
+// Middleware to fix date picker by injecting override script
+app.use((req, res, next) => {
+  const originalSend = res.send;
+  res.send = function(data) {
+    if (typeof data === 'string' && data.includes('booking_date')) {
+      // Inject CSS and JS to override WordPress date picker
+      const datePickerFix = `
+<style>
+/* Override WordPress date picker styles */
+input[name="booking_date"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background-color: white !important;
+  border: 1px solid #ccc !important;
+  padding: 8px !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+</style>
+<script>
+// Disable WordPress date picker plugin
+window.dy_date_picker = null;
+if (window.jQuery) {
+  jQuery(document).ready(function() {
+    var dateInputs = document.querySelectorAll('input[name="booking_date"]');
+    dateInputs.forEach(function(input) {
+      input.type = 'date';
+      input.removeAttribute('placeholder');
+      input.removeAttribute('disabled');
+      input.removeAttribute('class');
+      input.required = true;
+    });
+  });
+}
+</script>
+`;
+      data = data.replace('</body>', datePickerFix + '</body>');
+    }
+    return originalSend.call(this, data);
+  };
+  next();
+});
+
 // Serve static files
 app.use(express.static(__dirname));
 
