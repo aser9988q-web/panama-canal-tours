@@ -754,8 +754,15 @@ table.pure-table > thead{
 		opacity: 1 !important;
 		color: #333 !important;
 		margin-bottom: 10px !important;
-	}		</style>
-			<script>
+	}
+	
+	/* Remove all height restrictions */
+	* {
+		max-height: none !important;
+		min-height: 0 !important;
+		clip-path: none !important;
+		clip: auto !important;
+	}\t\t</style>		<script>
 				// Force show all form fields on page load
 				document.addEventListener('DOMContentLoaded', function() {
 					setTimeout(function() {
