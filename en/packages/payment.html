@@ -1103,5 +1103,23 @@ function handleBookingSubmit(event) {
   window.location.href = 'payment.html?dy_id=64&pax_regular=' + paxRegular + '&pax_discount=' + paxDiscount + '&pax_free=' + paxFree + '&booking_date=' + bookingDate;
 }
 </script>
+<script>
+// Show form fields on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Show all card form fields
+  const cardFields = document.querySelectorAll('.dy_card_form_fields');
+  cardFields.forEach(field => {
+    field.style.display = 'block !important';
+    field.classList.remove('hidden');
+  });
+  
+  // Show card payment conditions
+  const cardConditions = document.getElementById('dy_card_payment_conditions');
+  if (cardConditions) {
+    cardConditions.style.display = 'block !important';
+    cardConditions.classList.remove('hidden');
+  }
+});
+</script>
 </body>
 </html>
