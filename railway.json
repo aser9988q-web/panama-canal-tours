@@ -1,0 +1,16 @@
+{
+  "name": "panama-canal-tours",
+  "description": "Panama Canal Tours - Booking and Payment System",
+  "keywords": ["tours", "booking", "payment", "panama"],
+  "buildCommand": "npm install",
+  "startCommand": "npm start",
+  "env": {
+    "PORT": "3000",
+    "NODE_ENV": "production",
+    "DB_HOST": "${{ DATABASE_HOST }}",
+    "DB_PORT": "${{ DATABASE_PORT }}",
+    "DB_USER": "${{ DATABASE_USER }}",
+    "DB_PASSWORD": "${{ DATABASE_PASSWORD }}",
+    "DB_NAME": "${{ DATABASE_NAME }}"
+  }
+}
