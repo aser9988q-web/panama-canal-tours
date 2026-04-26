@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | Panama Canal Tours</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: #28a745;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .confirmation-details {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .booking-number {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .booking-number p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .booking-number .number {
+            color: #28a745;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-home {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-home:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-print {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-print:hover {
+            background: #e0e0e0;
+        }
+
+        .message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="success-icon">✅</div>
+            <h1>Booking Confirmed!</h1>
+            <p class="subtitle">Your Panama Canal tour has been successfully booked</p>
+
+            <div class="message">
+                A confirmation email has been sent to your registered email address with all the booking details.
+            </div>
+
+            <div class="booking-number">
+                <p>Your Booking Reference Number:</p>
+                <div class="number" id="bookingNumber">PCT-2026-05-001</div>
+            </div>
+
+            <div class="confirmation-details">
+                <div class="detail-row">
+                    <span class="detail-label">Tour Type:</span>
+                    <span class="detail-value" id="tourType">Partial Canal Transit</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value" id="tourDate">May 30, 2026</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Number of Adults:</span>
+                    <span class="detail-value" id="adults">1</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Number of Children (3-12):</span>
+                    <span class="detail-value" id="children">0</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Total Amount Paid:</span>
+                    <span class="detail-value" id="totalAmount">$180.00 USD</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value" style="color: #28a745; font-weight: bold;">✓ Confirmed</span>
+                </div>
+            </div>
+
+            <div class="message">
+                <strong>Important:</strong> Please arrive at Flamenco Marina, Amador at least 30 minutes before your scheduled check-in time. Bring your original passport or valid Panamanian ID.
+            </div>
+
+            <div class="button-group">
+                <button class="btn-print" onclick="window.print()">🖨️ Print Confirmation</button>
+                <button class="btn-home" onclick="window.location.href='/en/index.html'">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate booking number
+        const bookingNumber = 'PCT-' + new Date().getFullYear() + '-' + 
+                            String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
+                            String(Math.floor(Math.random() * 9000) + 1000);
+        document.getElementById('bookingNumber').textContent = bookingNumber;
+
+        // Store booking confirmation
+        sessionStorage.setItem('bookingNumber', bookingNumber);
+        sessionStorage.removeItem('paymentId');
+    </script>
+</body>
+</html>
