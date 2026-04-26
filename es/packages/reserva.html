@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Page - Panama Canal Tours</title>
+    <title>Panama Canal Tours - Reserva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,110 +13,90 @@
         }
         
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f0f4f8;
             color: #333;
         }
         
         header {
-            background-color: white;
+            background-color: #fff;
             padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #ccc;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        header h1 {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .logo h1 {
             font-size: 24px;
+            font-weight: bold;
             color: #000;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        
-        .booking-header {
-            background-color: #f0f8ff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            position: relative;
-        }
-        
-        .booking-title {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .go-back-btn {
-            background-color: #d32f2f;
-            color: white;
-            padding: 12px 30px;
+        .menu-btn {
+            background: none;
             border: none;
-            border-radius: 50px;
-            font-size: 16px;
+            font-size: 24px;
             cursor: pointer;
-            float: right;
-            text-decoration: none;
-            display: inline-block;
+            color: #0066cc;
         }
         
-        .go-back-btn:hover {
-            background-color: #b71c1c;
-        }
-        
-        .clear {
-            clear: both;
-        }
-        
-        .trip-info {
-            background-color: #7dd3d3;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 16px;
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .location-bar {
-            background-color: #7dd3d3;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
+            background-color: #a8e6f0;
+            padding: 12px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 16px;
+            font-size: 14px;
+        }
+        
+        .location-bar i {
+            color: #0099cc;
         }
         
         .whatsapp-btn {
             background-color: #25d366;
             color: white;
-            padding: 15px 30px;
             border: none;
-            border-radius: 50px;
-            font-size: 16px;
+            padding: 12px 24px;
+            border-radius: 25px;
             cursor: pointer;
-            margin: 20px auto;
-            display: block;
-            text-decoration: none;
+            font-size: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
         }
         
         .whatsapp-btn:hover {
-            background-color: #1eaa51;
+            background-color: #1da851;
         }
         
         .booking-summary {
-            background-color: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            margin-bottom: 30px;
         }
         
         .summary-table {
@@ -127,88 +108,98 @@
         .summary-table th {
             background-color: #003d7a;
             color: white;
-            padding: 15px;
+            padding: 12px;
             text-align: left;
             font-weight: bold;
         }
         
         .summary-table td {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
         }
         
         .summary-table tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+        
+        .included-section {
+            margin: 15px 0;
+            padding: 12px;
             background-color: #f9f9f9;
         }
         
-        .included {
-            padding: 15px;
-            background-color: #f0f8ff;
-            margin: 10px 0;
-            border-left: 4px solid #25d366;
+        .included-section strong {
+            color: #333;
         }
         
-        .not-included {
-            padding: 15px;
-            background-color: #fff0f0;
-            margin: 10px 0;
-            border-left: 4px solid #ff4444;
+        .check-icon {
+            color: #4caf50;
+            margin-right: 8px;
         }
         
-        .total-amount {
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
+        .x-icon {
+            color: #f44336;
+            margin-right: 8px;
+        }
+        
+        .total-section {
+            background-color: #f0f0f0;
             padding: 20px;
-            background-color: #f0f8ff;
+            text-align: center;
             margin: 20px 0;
-            border: 2px solid #ddd;
-            border-radius: 5px;
+            border-radius: 4px;
         }
         
-        .payment-text {
-            font-size: 16px;
-            margin: 20px 0;
+        .total-section h3 {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .payment-info {
+            background-color: #e8f4f8;
             padding: 15px;
-            background-color: #f0f8ff;
-            border-radius: 5px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
         }
         
         .payment-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 25px 0;
         }
         
         .payment-btn {
-            padding: 15px 20px;
+            padding: 12px 16px;
             border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 25px;
             cursor: pointer;
-            transition: transform 0.2s;
+            font-size: 14px;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
+            gap: 8px;
+            transition: transform 0.2s;
         }
         
         .payment-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
         }
         
         .visa-btn {
             background-color: #000;
             color: white;
+            grid-column: 1 / 2;
         }
         
         .paypal-btn {
             background-color: #ffc439;
-            color: black;
+            color: #003087;
+            grid-column: 2 / 3;
         }
         
         .tether-btn {
@@ -227,34 +218,38 @@
         }
         
         .estimate-btn {
-            background-color: #999;
-            color: white;
+            background-color: #ccc;
+            color: #333;
         }
         
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
+        .payment-logos {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
         }
         
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .payment-logos img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
         }
         
-        .modal-content h2 {
-            margin-bottom: 20px;
+        .payment-logos p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .form-section {
+            margin: 25px 0;
+        }
+        
+        .form-section h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
             color: #333;
         }
         
@@ -264,107 +259,179 @@
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
             font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 8px;
             color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 14px;
+            font-family: inherit;
         }
         
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #003d7a;
-            box-shadow: 0 0 5px rgba(0, 61, 122, 0.3);
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
         }
         
-        .submit-btn {
-            background-color: #003d7a;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
+        .phone-group {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 10px;
+        }
+        
+        .phone-group select {
             width: 100%;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .warning-box i {
+            color: #333;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .warning-box p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .terms-section {
+            margin: 25px 0;
+        }
+        
+        .terms-section h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            font-weight: bold;
+            color: #c41e3a;
+            text-transform: uppercase;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .proceed-btn {
+            background-color: #c41e3a;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
             margin-top: 20px;
         }
         
-        .submit-btn:hover {
-            background-color: #002847;
+        .proceed-btn:hover {
+            background-color: #a01830;
         }
         
-        .close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        .go-back-btn {
+            background-color: #c41e3a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            float: right;
         }
         
-        .close-modal:hover {
-            color: #000;
+        .go-back-btn:hover {
+            background-color: #a01830;
         }
         
-        .unavailable-msg {
-            background-color: #fff3cd;
-            border: 1px solid #ffc107;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: center;
-            display: none;
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .payment-buttons {
                 grid-template-columns: 1fr;
             }
             
-            .booking-title {
-                font-size: 24px;
+            .visa-btn,
+            .paypal-btn {
+                grid-column: 1 / 2;
             }
             
-            .total-amount {
-                font-size: 24px;
+            .phone-group {
+                grid-template-columns: 80px 1fr;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>PANAMA CANAL TOURS</h1>
+        <div class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" style="margin-right: 10px;">
+                <path d="M20 2 L28 15 L40 15 L30 23 L35 36 L20 28 L5 36 L10 23 L0 15 L12 15 Z" fill="#c41e3a"/>
+                <path d="M20 2 L12 15 L0 15 L10 23 L5 36 L20 28 L35 36 L30 23 L40 15 L28 15 Z" fill="#003d7a"/>
+            </svg>
+            <h1>PANAMA CANAL TOURS</h1>
+        </div>
+        <button class="menu-btn">☰</button>
     </header>
     
     <div class="container">
-        <div class="booking-header">
-            <div class="booking-title">Página de Reserva:<br>Recorrido en bote del Canal de Panamá [Tránsito Parcial]</div>
-            <a href="javascript:history.back()" class="go-back-btn">← Volver</a>
-            <div class="clear"></div>
-        </div>
-        
-        <div class="trip-info">
-            ⏱️ 6 hours
-        </div>
-        
-        <div class="trip-info">
-            📅 <span id="trip-date">May 30, 2026</span>
+        <div class="clearfix">
+            <button class="go-back-btn">← Volver</button>
         </div>
         
         <div class="location-bar">
-            📍 Flamenco Marina, Amador, Panama City
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Flamenco Marina, Amador, Panama City</span>
         </div>
         
-        <button class="whatsapp-btn" onclick="window.open('https://wa.me/+507644007600', '_blank')">
-            💬 Soporte por Whatsapp
+        <button class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            Soporte por Whatsapp
         </button>
         
         <div class="booking-summary">
@@ -377,94 +444,158 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Adultos: <strong id="adults-count">4</strong></td>
-                        <td>$<strong id="adults-subtotal">720.00</strong></td>
+                        <td>Adultos: <strong>4</strong></td>
+                        <td>$720.00</td>
                     </tr>
                     <tr>
-                        <td>Niños 0 - 2 años: <strong id="children-free-count">1</strong></td>
-                        <td><strong>0.00</strong></td>
+                        <td>Niños 0 - 2 años: <strong>1</strong></td>
+                        <td>0.00</td>
                     </tr>
                     <tr>
-                        <td>Niños 3 - 12 años: <strong id="children-count">3</strong></td>
-                        <td>$<strong id="children-subtotal">375.00</strong></td>
+                        <td>Niños 3 - 12 años: <strong>3</strong></td>
+                        <td>$375.00</td>
                     </tr>
                 </tbody>
             </table>
             
-            <div class="included">
-                <strong>✓ Incluido:</strong> Guide and ✓ Lunch
+            <div class="included-section">
+                <strong><i class="fas fa-check check-icon"></i>Incluido:</strong> Guía y <i class="fas fa-check check-icon"></i>Almuerzo
             </div>
             
-            <div class="not-included">
-                <strong>✗ Not Incluido:</strong> Ground transport to the meeting point
+            <div class="included-section">
+                <strong><i class="fas fa-times x-icon"></i>No Incluido:</strong> Transporte terrestre al punto de encuentro
             </div>
             
-            <div class="total-amount">
-                Total $<span id="total-amount">1,095.00</span> USD
+            <div class="total-section">
+                <h3>Total $1,095.00 USD</h3>
             </div>
         </div>
         
-        <div class="payment-text">
-            Pay ($<span id="payment-total">1,095.00</span> USD) with Mastercard, Visa, Paypal, Tether (USDT), USD Coin (USDC), Yappy or request an estimate.
+        <div class="payment-info">
+            Pague ($1,095.00 USD) con Mastercard, Visa, Paypal, Tether (USDT), USD Coin (USDC), Yappy o solicite un presupuesto.
         </div>
         
         <div class="payment-buttons">
-            <button class="payment-btn visa-btn" onclick="openPaymentModal('visa')">
-                🛒 Mastercard or Visa
+            <button class="payment-btn visa-btn" onclick="showPaymentForm('visa')">
+                <i class="fas fa-shopping-cart"></i> Mastercard o Visa
             </button>
-            <button class="payment-btn paypal-btn" onclick="showUnavailable()">
-                🛒 PayPal
+            <button class="payment-btn paypal-btn" onclick="alert('PayPal no está disponible en este momento')">
+                <i class="fas fa-shopping-cart"></i> Paypal
             </button>
-            <button class="payment-btn tether-btn" onclick="showUnavailable()">
-                ₮ Tether (USDT)
+            <button class="payment-btn tether-btn" onclick="alert('Tether no está disponible en este momento')">
+                <i class="fas fa-coins"></i> Tether (USDT)
             </button>
-            <button class="payment-btn usdc-btn" onclick="showUnavailable()">
-                💵 USD Coin (USDC)
+            <button class="payment-btn usdc-btn" onclick="alert('USD Coin no está disponible en este momento')">
+                <i class="fas fa-coins"></i> USD Coin (USDC)
             </button>
-            <button class="payment-btn yappy-btn" onclick="showUnavailable()">
-                📱 Yappy
+            <button class="payment-btn yappy-btn" onclick="alert('Yappy no está disponible en este momento')">
+                <i class="fas fa-mobile-alt"></i> Yappy
             </button>
-            <button class="payment-btn estimate-btn" onclick="requestEstimate()">
-                ✉️ request an estimate
+            <button class="payment-btn estimate-btn" onclick="alert('Solicitar un presupuesto')">
+                <i class="fas fa-envelope"></i> Solicitar presupuesto
             </button>
         </div>
         
-        <div class="unavailable-msg" id="unavailableMsg">
-            This payment method is not available at the moment. Please use Mastercard or Visa.
-        </div>
-    </div>
-    
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
-            <h2>Complete su Pago</h2>
-            <form onsubmit="submitPayment(event)">
-                <div class="form-group">
-                    <label for="firstName">Nombre *</label>
-                    <input type="text" id="firstName" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Apellido *</label>
-                    <input type="text" id="lastName" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo Electrónico *</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Teléfono *</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="cardNumber">Número de Tarjeta *</label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div id="paymentForm" style="display: none;">
+            <div class="payment-logos">
+                <img src="assets/payment-logos.svg" alt="Visa, Mastercard, PayPal">
+                <p>Pague con Mastercard o Visa gracias a Paguelo Facil</p>
+            </div>
+            
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-section">
+                    <h3>Detalles de Contacto</h3>
+                    
                     <div class="form-group">
-                        <label for="expMonth">Mes de Vencimiento *</label>
-                        <select id="expMonth" required>
-                            <option value="">-- Month --</option>
+                        <label>Nombre</label>
+                        <input type="text" name="firstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Apellido</label>
+                        <input type="text" name="lastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Repetir Correo Electrónico</label>
+                        <input type="email" name="repeatEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <div class="phone-group">
+                            <select name="countryCode" required>
+                                <option value="">--</option>
+                                <option value="+1">+1 (US)</option>
+                                <option value="+507">+507 (PA)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+33">+33 (FR)</option>
+                                <option value="+34">+34 (ES)</option>
+                                <option value="+39">+39 (IT)</option>
+                                <option value="+49">+49 (DE)</option>
+                            </select>
+                            <input type="tel" name="phone" placeholder="Número de teléfono" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <i class="fas fa-info-circle"></i>
+                    <p>El titular de la tarjeta debe ser la persona que realiza la compra o reserva y debe participar en su uso, ya sea individualmente o como parte de un grupo. No se permiten transacciones de terceros. Las transacciones que no cumplan estas condiciones pueden ser canceladas sin previo aviso y se puede denegar el uso.</p>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Dirección de Facturación</h3>
+                    
+                    <div class="form-group">
+                        <label>País</label>
+                        <select name="country" required>
+                            <option value="">--</option>
+                            <option value="US">Estados Unidos</option>
+                            <option value="PA">Panamá</option>
+                            <option value="CA">Canadá</option>
+                            <option value="MX">México</option>
+                            <option value="GB">Reino Unido</option>
+                            <option value="FR">Francia</option>
+                            <option value="DE">Alemania</option>
+                            <option value="IT">Italia</option>
+                            <option value="ES">España</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Ciudad</label>
+                        <input type="text" name="city" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" name="address" required>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Para completar su reserva, requerimos una imagen clara del pasaporte de cada participante (para extranjeros) o cédula de identidad válida (para ciudadanos). Estos documentos son necesarios para la seguridad de todos los participantes. Las copias proporcionadas serán verificadas contra los originales en el punto de encuentro, ya sea por la empresa o por las autoridades locales competentes.</p>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Detalles de la Tarjeta</h3>
+                    
+                    <div class="form-group">
+                        <label>Números de Tarjeta</label>
+                        <input type="text" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mes de Vencimiento</label>
+                        <select name="expMonth" required>
+                            <option value="">--</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
                             <option value="03">03</option>
@@ -479,101 +610,62 @@
                             <option value="12">12</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="expYear">Año de Vencimiento *</label>
-                        <select id="expYear" required>
-                            <option value="">-- Year --</option>
+                        <label>Año de Vencimiento</label>
+                        <select name="expYear" required>
+                            <option value="">--</option>
                             <option value="2026">2026</option>
                             <option value="2027">2027</option>
                             <option value="2028">2028</option>
                             <option value="2029">2029</option>
                             <option value="2030">2030</option>
+                            <option value="2031">2031</option>
+                            <option value="2032">2032</option>
+                            <option value="2033">2033</option>
+                            <option value="2034">2034</option>
+                            <option value="2035">2035</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" name="cvv" placeholder="123" maxlength="4" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="cvv">CVV *</label>
-                    <input type="text" id="cvv" placeholder="123" required>
+                
+                <div class="terms-section">
+                    <h3>Términos y Condiciones</h3>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">ACUERDO GENERAL</label>
+                    </div>
                 </div>
-                <button type="submit" class="submit-btn">Completar Pago</button>
+                
+                <button type="submit" class="proceed-btn">Proceder</button>
             </form>
         </div>
     </div>
     
     <script>
-        // Get URL parameters
-        const params = new URLSearchParams(window.location.search);
-        const adults = parseInt(params.get('pax_regular')) || 4;
-        const children = parseInt(params.get('pax_discount')) || 3;
-        const childrenFree = parseInt(params.get('pax_free')) || 1;
-        const bookingDate = params.get('booking_date') || '2026-05-30';
-        
-        // Prices
-        const adultPrice = 180;
-        const childPrice = 125;
-        
-        // Update page with booking data
-        function updateBookingData() {
-            document.getElementById('adults-count').textContent = adults;
-            document.getElementById('children-count').textContent = children;
-            document.getElementById('children-free-count').textContent = childrenFree;
-            
-            const adultsSubtotal = adults * adultPrice;
-            const childrenSubtotal = children * childPrice;
-            const total = adultsSubtotal + childrenSubtotal;
-            
-            document.getElementById('adults-subtotal').textContent = adultsSubtotal.toFixed(2);
-            document.getElementById('children-subtotal').textContent = childrenSubtotal.toFixed(2);
-            document.getElementById('total-amount').textContent = total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('payment-total').textContent = total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            
-            // Format date
-            const dateObj = new Date(bookingDate);
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('trip-date').textContent = dateObj.toLocaleDateString('en-US', options);
-        }
-        
-        function openPaymentModal(method) {
+        function showPaymentForm(method) {
             if (method === 'visa') {
-                document.getElementById('paymentModal').style.display = 'block';
+                document.getElementById('paymentForm').style.display = 'block';
+                document.querySelector('.payment-buttons').style.display = 'none';
+                document.querySelector('.payment-info').style.display = 'none';
+                window.scrollTo(0, 0);
             }
         }
         
-        function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-        
-        function showUnavailable() {
-            const msg = document.getElementById('unavailableMsg');
-            msg.style.display = 'block';
-            setTimeout(() => {
-                msg.style.display = 'none';
-            }, 3000);
-        }
-        
-        function requestEstimate() {
-            const email = prompt('Please enter your email address:');
-            if (email) {
-                alert('Thank you! We will send you an estimate to ' + email);
-            }
-        }
-        
-        function submitPayment(event) {
+        function handleSubmit(event) {
             event.preventDefault();
-            alert('Payment submitted successfully! Your booking is confirmed.');
-            closePaymentModal();
+            alert('El procesamiento de pagos ocurriría aquí. Esta es una demostración.');
         }
         
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('paymentModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-        
-        // Initialize
-        updateBookingData();
+        document.querySelector('.go-back-btn').addEventListener('click', function() {
+            window.history.back();
+        });
     </script>
 </body>
 </html>
