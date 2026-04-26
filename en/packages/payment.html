@@ -678,9 +678,57 @@ table.pure-table > thead{
 }
 
 .dy_package .dy_title_h3 > h3 a {
-	color: #005293
-}		</style>
-		</head>
+		color: #005293
+	}		</style>
+			<script>
+			// Force show all form fields on page load
+			document.addEventListener('DOMContentLoaded', function() {
+				setTimeout(function() {
+					// Show all dy_card_form_fields
+					const fields = document.querySelectorAll('.dy_card_form_fields');
+					fields.forEach(field => {
+						field.style.display = 'block !important';
+						field.style.visibility = 'visible !important';
+						field.style.opacity = '1 !important';
+						field.style.height = 'auto !important';
+						field.style.overflow = 'visible !important';
+						field.style.maxHeight = 'none !important';
+					});
+					
+					// Show all inputs, selects, textareas
+					const inputs = document.querySelectorAll('input, select, textarea');
+					inputs.forEach(input => {
+						input.style.display = 'block !important';
+						input.style.visibility = 'visible !important';
+					});
+					
+					// Show payment conditions
+					const conditions = document.getElementById('dy_card_payment_conditions');
+					if(conditions) {
+						conditions.style.display = 'block !important';
+						conditions.style.visibility = 'visible !important';
+					}
+					
+					// Show cc form
+					const ccForm = document.getElementById('dy_cc_form');
+					if(ccForm) {
+						ccForm.style.display = 'block !important';
+					}
+				}, 500);
+			});
+			
+			// Also run on window load
+			window.addEventListener('load', function() {
+				setTimeout(function() {
+					const fields = document.querySelectorAll('.dy_card_form_fields');
+					fields.forEach(field => {
+						field.style.display = 'block !important';
+						field.style.visibility = 'visible !important';
+					});
+				}, 1000);
+			});
+			</script>
+			</head>
 
 
 <body class="packages-template-default single single-packages postid-64 custom-background wp-theme-minimalizr fl-builder-lite-2-10-1-5 fl-no-js">
