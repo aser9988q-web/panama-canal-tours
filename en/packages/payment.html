@@ -1001,6 +1001,160 @@ table.pure-table > thead{
         <hr/>
 
         <p class="text-center bottom-20 large">Pay ($<span class="dy_calc dy_calc_total">1,400.00</span> USD) with Mastercard, Visa, Paypal, Tether (USDT), USD Coin (USDC), Yappy or request an estimate.</p><div id="dy_payment_buttons" class="text-center bottom-20"><button  data-type="card-on-site" data-id="paguelo_facil_on" data-branding="&lt;p&gt;&lt;img src=&quot;https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/visa-mastercard.svg&quot; width=&quot;250&quot; height=&quot;50&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;large text-muted&quot;&gt;Pay with Mastercard o Visa thanks to Paguelo Facil&lt;/p&gt;" style="color: #fff; background-color: #262626;" class="pure-button bottom-20 rounded" type="button"><span class="dashicons dashicons-cart"></span> Mastercard or Visa</button> <button  data-type="alt" data-id="paypal_me" data-branding="&lt;img src=&quot;https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/paypal_me.svg&quot; width=&quot;205&quot; height=&quot;50&quot; alt=&quot;Paypal&quot; /&gt;&lt;p class=&quot;large&quot;&gt;&lt;strong&gt;All payments made with PayPal are subject to a an additional 6% service fee.&lt;/strong&gt;&lt;/p&gt;" style="color: #000; background-color: #FFD700;" class="pure-button bottom-20 rounded" type="button"><span class="dashicons dashicons-cart"></span> Paypal</button> <button data-networks="{&quot;eth&quot;:{&quot;name&quot;:&quot;Ethereum (ERC-20) Network&quot;},&quot;bsc&quot;:{&quot;name&quot;:&quot;Binance Smart Chain (BEP-20)&quot;},&quot;matic&quot;:{&quot;name&quot;:&quot;Poligon (MATIC) Network&quot;},&quot;sol&quot;:{&quot;name&quot;:&quot;Solana Network&quot;},&quot;avax&quot;:{&quot;name&quot;:&quot;Avalanche Network&quot;}}" data-type="crypto" data-id="usdt" data-branding="&lt;img src=&quot;https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/usdt.svg&quot; width=&quot;50&quot; height=&quot;50&quot; alt=&quot;Tether (USDT)&quot; /&gt;" style="color: #fff; background-color: #50AF95;" class="pure-button bottom-20 rounded" type="button"><img width="15" height="15" src="https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/usdt_icon.svg" alt="Tether (USDT)" /> Tether (USDT)</button> <button data-networks="{&quot;eth&quot;:{&quot;name&quot;:&quot;Ethereum (ERC-20) Network&quot;},&quot;bsc&quot;:{&quot;name&quot;:&quot;Binance Smart Chain (BEP-20)&quot;},&quot;matic&quot;:{&quot;name&quot;:&quot;Poligon (MATIC) Network&quot;},&quot;sol&quot;:{&quot;name&quot;:&quot;Solana Network&quot;},&quot;avax&quot;:{&quot;name&quot;:&quot;Avalanche Network&quot;}}" data-type="crypto" data-id="usdc" data-branding="&lt;img src=&quot;https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/usdc.svg&quot; width=&quot;50&quot; height=&quot;50&quot; alt=&quot;USD Coin (USDC)&quot; /&gt;" style="color: #fff; background-color: #2775CA;" class="pure-button bottom-20 rounded" type="button"><img width="15" height="15" src="https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/usdc_icon.svg" alt="USD Coin (USDC)" /> USD Coin (USDC)</button> <button  data-type="alt" data-id="yappy_direct" data-branding="&lt;img src=&quot;https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/yappy_direct.svg&quot; width=&quot;80&quot; height=&quot;69&quot; alt=&quot;Yappy&quot; /&gt;" style="color: #fff; background-color: #013685;" class="pure-button bottom-20 rounded" type="button"><img alt="yappy" width="21" height="12" src="https://panamacanal.tours/wp-content/plugins/dynamicpackages/gateways/matrix/assets/yappy_direct_icon.svg" /> Yappy</button> <button  data-type="alt" data-id="estimate_request" data-branding="&lt;p class=&quot;large&quot;&gt;Request a Quote&lt;/p&gt;" style="color: #444; background-color: #ccc;" class="pure-button bottom-20 rounded" type="button"><span class="dashicons dashicons-email"></span> request an estimate</button></div>
+<!-- NEW PAYMENT FORM -->
+<div id="dy_payment_form_container" style="background-color: #f5f5f5; padding: 30px; margin-top: 30px; border-radius: 5px;">
+	<h3 style="color: #333; margin-bottom: 20px;">Payment Details</h3>
+	
+	<form id="dy_new_payment_form" method="POST" style="max-width: 600px; margin: 0 auto;">
+		<!-- Contact Details -->
+		<div style="margin-bottom: 20px;">
+			<h4 style="color: #333; font-size: 16px; margin-bottom: 15px;">Contact Details</h4>
+			
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">First Name *</label>
+					<input type="text" name="first_name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+				</div>
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Last Name *</label>
+					<input type="text" name="last_name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+				</div>
+			</div>
+			
+			<div style="margin-bottom: 15px;">
+				<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Email *</label>
+				<input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+			</div>
+			
+			<div style="margin-bottom: 15px;">
+				<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Phone *</label>
+				<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 10px;">
+					<select name="country_code" required style="padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white;">
+						<option value="">Select Country</option>
+						<option value="+1">🇺🇸 +1</option>
+						<option value="+44">🇬🇧 +44</option>
+						<option value="+507">🇵🇦 +507</option>
+						<option value="+34">🇪🇸 +34</option>
+						<option value="+33">🇫🇷 +33</option>
+						<option value="+49">🇩🇪 +49</option>
+						<option value="+39">🇮🇹 +39</option>
+						<option value="+55">🇧🇷 +55</option>
+						<option value="+52">🇲🇽 +52</option>
+						<option value="+81">🇯🇵 +81</option>
+						<option value="+86">🇨🇳 +86</option>
+						<option value="+91">🇮🇳 +91</option>
+					</select>
+					<input type="tel" name="phone" required placeholder="Phone Number" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+				</div>
+			</div>
+		</div>
+		
+		<!-- Billing Address -->
+		<div style="margin-bottom: 20px;">
+			<h4 style="color: #333; font-size: 16px; margin-bottom: 15px;">Billing Address</h4>
+			
+			<div style="margin-bottom: 15px;">
+				<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Country *</label>
+				<select name="billing_country" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+					<option value="">Select Country</option>
+					<option value="US">🇺🇸 United States</option>
+					<option value="GB">🇬🇧 United Kingdom</option>
+					<option value="PA">🇵🇦 Panama</option>
+					<option value="ES">🇪🇸 Spain</option>
+					<option value="FR">🇫🇷 France</option>
+					<option value="DE">🇩🇪 Germany</option>
+					<option value="IT">🇮🇹 Italy</option>
+					<option value="BR">🇧🇷 Brazil</option>
+					<option value="MX">🇲🇽 Mexico</option>
+					<option value="JP">🇯🇵 Japan</option>
+					<option value="CN">🇨🇳 China</option>
+					<option value="IN">🇮🇳 India</option>
+				</select>
+			</div>
+			
+			<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 15px;">
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">City *</label>
+					<input type="text" name="billing_city" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+				</div>
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Zip Code *</label>
+					<input type="text" name="billing_zip" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+				</div>
+			</div>
+			
+			<div style="margin-bottom: 15px;">
+				<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Address *</label>
+				<input type="text" name="billing_address" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+			</div>
+		</div>
+		
+		<!-- Card Details -->
+		<div style="margin-bottom: 20px;">
+			<h4 style="color: #333; font-size: 16px; margin-bottom: 15px;">Card Details</h4>
+			
+			<div style="margin-bottom: 15px;">
+				<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Card Number *</label>
+				<input type="text" name="card_number" placeholder="1234 5678 9012 3456" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+			</div>
+			
+			<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Month *</label>
+					<select name="card_month" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white;">
+						<option value="">MM</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">Year *</label>
+					<select name="card_year" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white;">
+						<option value="">YY</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+					</select>
+				</div>
+				<div>
+					<label style="display: block; margin-bottom: 5px; color: #333; font-weight: bold;">CVV *</label>
+					<input type="text" name="card_cvv" placeholder="123" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: white; box-sizing: border-box;">
+				</div>
+			</div>
+		</div>
+		
+		<!-- Terms & Conditions -->
+		<div style="margin-bottom: 20px;">
+			<label style="display: flex; align-items: center; color: #333;">
+				<input type="checkbox" name="terms" required style="margin-right: 10px; width: 18px; height: 18px;">
+				<span>I agree to the <a href="#" style="color: #0066cc; text-decoration: none;">Terms & Conditions</a></span>
+			</label>
+		</div>
+		
+		<!-- Submit Button -->
+		<div style="text-align: center;">
+			<button type="submit" style="background-color: #50AF95; color: white; padding: 12px 30px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer;">Proceed to Payment</button>
+		</div>
+	</form>
+</div>
+
 <form id="dy_package_request_form" class="hidden" data-nonce="param" data-method="post" data-action="aHR0cHM6Ly9wYW5hbWFjYW5hbC50b3Vycy9wYWNrYWdlcy9wYXJ0aWFsLXRyYW5zaXQ=">
 
 	    <div class="text-center bottom-20" id="dy_checkout_branding">
