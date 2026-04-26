@@ -1190,6 +1190,23 @@ const dyPackageEnabledTimes = [];
 </script>
 <script type="text/javascript" src="../wp-content/plugins/dynamicpackages/public/js/dynamicpackages-package-page.js%3Fver=1.3.6" id="dynamicpackages-page-js"></script>
 
+<script type="text/javascript">
+function handleBookingSubmit(event) {
+  event.preventDefault();
+  const form = event.target.closest("form");
+  const paxRegular = form.querySelector("[name="pax_regular"]")?.value || "1";
+  const paxDiscount = form.querySelector("[name="pax_discount"]")?.value || "0";
+  const paxFree = form.querySelector("[name="pax_free"]")?.value || "0";
+  const bookingDate = form.querySelector("[name="booking_date"]")?.value;
+  
+  if (!bookingDate) {
+    alert("Please select a date");
+    return;
+  }
+  
+  window.location.href = "payment.html?dy_id=64&pax_regular=" + paxRegular + "&pax_discount=" + paxDiscount + "&pax_free=" + paxFree + "&booking_date=" + bookingDate;
+}
+</script>
 </body>
 </html>
 
