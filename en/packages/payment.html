@@ -697,6 +697,32 @@ table.pure-table > thead{
 		opacity: 1 !important;
 		background-color: white !important;
 		color: #333 !important;
+	}
+	
+	/* Force show all form sections */
+	.dy_card_form_fields, .dy_card_payment_conditions, #dy_cc_form {
+		display: block !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+		height: auto !important;
+		overflow: visible !important;
+		max-height: none !important;
+		margin: 0 !important;
+		padding: 20px !important;
+	}
+	
+	/* Force show all inputs, selects, textareas */
+	input, select, textarea {
+		display: block !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+		background-color: white !important;
+		color: #333 !important;
+		pointer-events: auto !important;
+		cursor: text !important;
+		margin-bottom: 10px !important;
+		padding: 8px 12px !important;
+		border: 1px solid #ddd !important;
 	}		</style>
 			<script>
 			// Force show all form fields on page load
