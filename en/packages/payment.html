@@ -695,11 +695,13 @@ table.pure-table > thead{
 						field.style.maxHeight = 'none !important';
 					});
 					
-					// Show all inputs, selects, textareas
+					// Remove disabled attribute from all inputs, selects, textareas
 					const inputs = document.querySelectorAll('input, select, textarea');
 					inputs.forEach(input => {
 						input.style.display = 'block !important';
 						input.style.visibility = 'visible !important';
+						input.removeAttribute('disabled');
+						input.disabled = false;
 					});
 					
 					// Show payment conditions
@@ -724,6 +726,13 @@ table.pure-table > thead{
 					fields.forEach(field => {
 						field.style.display = 'block !important';
 						field.style.visibility = 'visible !important';
+					});
+					
+					// Remove disabled from all inputs
+					const allInputs = document.querySelectorAll('input, select, textarea');
+					allInputs.forEach(input => {
+						input.removeAttribute('disabled');
+						input.disabled = false;
 					});
 				}, 1000);
 			});
