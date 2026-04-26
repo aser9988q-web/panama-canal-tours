@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Booking Panama Canal [Partial Transit] boat tour | Panama Canal Tours</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="../wp-content/themes/minimalizr/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #003d7a;
+            margin-bottom: 10px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .booking-page-title {
+            font-size: 32px;
+            color: #003d7a;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .booking-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .summary-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #003d7a;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00a8e8;
+        }
+        
+        .summary-table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        
+        .summary-table thead {
+            background-color: #003d7a;
+            color: white;
+        }
+        
+        .summary-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .summary-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .summary-info {
+            background-color: #e0f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-info p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .summary-info strong {
+            color: #003d7a;
+        }
+        
+        .included-excluded {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .included-excluded p {
+            margin: 8px 0;
+        }
+        
+        .included-excluded .included {
+            color: #28a745;
+        }
+        
+        .included-excluded .excluded {
+            color: #dc3545;
+        }
+        
+        .total-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003d7a;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        
+        .payment-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .payment-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #003d7a;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00a8e8;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .payment-btn {
+            padding: 12px 24px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+        
+        .payment-btn:hover {
+            border-color: #003d7a;
+            background-color: #f0f0f0;
+        }
+        
+        .payment-btn.active {
+            background-color: #003d7a;
+            color: white;
+            border-color: #003d7a;
+        }
+        
+        .payment-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .payment-btn.disabled:hover {
+            border-color: #ddd;
+            background-color: white;
+        }
+        
+        .card-payment {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #003d7a;
+            box-shadow: 0 0 0 3px rgba(0, 61, 122, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #003d7a;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #003d7a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #002a5c;
+        }
+        
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .go-back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #003d7a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .go-back-btn:hover {
+            color: #00a8e8;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+            }
+            
+            .payment-btn {
+                width: 100%;
+            }
+            
+            .booking-page-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Panama Canal Tours</h1>
+    </div>
+    
+    <div class="container">
+        <a href="javascript:history.back()" class="go-back-btn">← Go back</a>
+        
+        <h2 class="booking-page-title">Booking Page: Panama Canal [Partial Transit] boat tour</h2>
+        
+        <!-- Booking Summary Section -->
+        <div class="booking-summary">
+            <div class="summary-header">Booking Summary</div>
+            
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Prices Per Person</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Adults: <strong id="adults-count">3</strong></td>
+                        <td>$180.00</td>
+                        <td id="adults-subtotal">$540.00</td>
+                    </tr>
+                    <tr>
+                        <td>Children 0 - 2 years old: <strong id="children-free-count">1</strong></td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Children 3 - 12 years old: <strong id="children-discount-count">3</strong></td>
+                        <td>$125.00</td>
+                        <td id="children-subtotal">$375.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="summary-info">
+                <p><strong>Date:</strong> <span id="booking-date">May 30, 2026</span></p>
+                <p><strong>Location:</strong> Flamenco Marina, Amador, Panama City</p>
+                <p><strong>Duration:</strong> 6 hours</p>
+            </div>
+            
+            <div class="included-excluded">
+                <p><span class="included">✓ Included:</span> Guide and Lunch</p>
+                <p><span class="excluded">✗ Not Included:</span> Ground transport to the meeting point</p>
+            </div>
+            
+            <div class="total-amount">
+                Total <span id="total-amount">$915.00</span> USD
+            </div>
+        </div>
+        
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <div class="payment-header">Select Payment Method</div>
+            
+            <div class="payment-methods">
+                <button class="payment-btn active" onclick="selectPaymentMethod('visa', this)">💳 Visa/Mastercard</button>
+                <button class="payment-btn disabled" onclick="showUnavailable()" title="Coming soon">🅿️ PayPal</button>
+                <button class="payment-btn disabled" onclick="showUnavailable()" title="Coming soon">₮ Tether (USDT)</button>
+                <button class="payment-btn disabled" onclick="showUnavailable()" title="Coming soon">💵 USD Coin (USDC)</button>
+                <button class="payment-btn disabled" onclick="showUnavailable()" title="Coming soon">📱 Yappy</button>
+            </div>
+            
+            <!-- Card Payment Form -->
+            <div id="card-payment" class="card-payment">
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> The cardholder must be the person who makes the purchase or reservation and must participate in its use, either individually or as part of a group.
+                </div>
+                
+                <form id="payment-form" onsubmit="handlePaymentSubmit(event)">
+                    <div class="form-section-title">Contact Details</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section-title">Billing Address</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            <select id="country" name="country" required>
+                                <option value="">-- Select Country --</option>
+                                <option value="panama">Panama</option>
+                                <option value="usa">United States</option>
+                                <option value="canada">Canada</option>
+                                <option value="mexico">Mexico</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section-title">Card Details</div>
+                    
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number *</label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expMonth">Expiration Month *</label>
+                            <select id="expMonth" name="expMonth" required>
+                                <option value="">-- Month --</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expYear">Expiration Year *</label>
+                            <select id="expYear" name="expYear" required>
+                                <option value="">-- Year --</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cvv">CVV *</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the Terms & Conditions</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Complete Payment - <span id="total-display">$915.00</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Get booking details from URL parameters
+        function getUrlParameter(name) {
+            const url = new URL(window.location);
+            return url.searchParams.get(name);
+        }
+        
+        // Initialize page with booking details
+        function initializeBooking() {
+            const dy_id = getUrlParameter('dy_id');
+            const pax_regular = parseInt(getUrlParameter('pax_regular')) || 1;
+            const pax_discount = parseInt(getUrlParameter('pax_discount')) || 0;
+            const pax_free = parseInt(getUrlParameter('pax_free')) || 0;
+            const booking_date = getUrlParameter('booking_date');
+            
+            // Update counts
+            document.getElementById('adults-count').textContent = pax_regular;
+            document.getElementById('children-discount-count').textContent = pax_discount;
+            document.getElementById('children-free-count').textContent = pax_free;
+            
+            // Calculate totals
+            const adultsPrice = 180;
+            const childrenPrice = 125;
+            
+            const adultsSubtotal = pax_regular * adultsPrice;
+            const childrenSubtotal = pax_discount * childrenPrice;
+            const total = adultsSubtotal + childrenSubtotal;
+            
+            document.getElementById('adults-subtotal').textContent = '$' + adultsSubtotal.toFixed(2);
+            document.getElementById('children-subtotal').textContent = '$' + childrenSubtotal.toFixed(2);
+            document.getElementById('total-amount').textContent = '$' + total.toFixed(2);
+            document.getElementById('total-display').textContent = '$' + total.toFixed(2);
+            
+            // Format date
+            if (booking_date) {
+                const date = new Date(booking_date);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('booking-date').textContent = date.toLocaleDateString('en-US', options);
+            }
+        }
+        
+        // Payment method selection
+        function selectPaymentMethod(method, button) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.payment-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+        }
+        
+        // Show unavailable payment method message
+        function showUnavailable() {
+            alert('This payment method is not available at the moment. Please use Visa/Mastercard.');
+        }
+        
+        // Handle payment form submission
+        function handlePaymentSubmit(event) {
+            event.preventDefault();
+            
+            // Validate form
+            const form = document.getElementById('payment-form');
+            if (!form.checkValidity()) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Show success message
+            alert('Payment processed successfully! Your booking has been confirmed.');
+            
+            // In a real scenario, you would send this data to a payment processor
+            console.log('Payment submitted:', {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                address: document.getElementById('address').value,
+                cardNumber: document.getElementById('cardNumber').value,
+                expMonth: document.getElementById('expMonth').value,
+                expYear: document.getElementById('expYear').value,
+                cvv: document.getElementById('cvv').value,
+            });
+        }
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initializeBooking);
+    </script>
+</body>
+</html>
