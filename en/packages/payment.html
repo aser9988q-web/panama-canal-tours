@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Payment - Panama Canal Tours</title>
+<link rel='stylesheet' href='../wp-content/themes/minimalizr/css/minimal-layout.css%3Fver=1.5.7.css' type='text/css' media='all' />
+<link rel='stylesheet' href='../wp-content/themes/minimalizr/style.css%3Fver=1.5.7.css' type='text/css' media='all' />
+<style>
+body { background-color: #f0f8ff; }
+.payment-container { max-width: 900px; margin: 40px auto; padding: 20px; }
+.booking-summary { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.booking-summary h2 { color: #333; margin-top: 0; }
+.summary-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+.summary-table th, .summary-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+.summary-table th { background-color: #003d82; color: white; }
+.summary-table tr:hover { background-color: #f5f5f5; }
+.total-row { font-weight: bold; font-size: 18px; background-color: #e8f4f8; }
+.payment-methods { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.payment-methods h3 { color: #333; margin-top: 0; }
+.payment-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0; }
+.payment-btn { padding: 12px 20px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+.payment-btn.active { background-color: #003d82; color: white; }
+.payment-btn.inactive { background-color: #ccc; color: #666; cursor: not-allowed; }
+.payment-btn.active:hover { background-color: #002a5a; }
+.payment-form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: none; }
+.payment-form.active { display: block; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.submit-btn { background-color: #003d82; color: white; padding: 15px 40px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
+.submit-btn:hover { background-color: #002a5a; }
+.alert { padding: 15px; border-radius: 6px; margin-bottom: 20px; }
+.alert-warning { background-color: #fff3cd; border: 1px solid #ffc107; color: #856404; }
+.alert-info { background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+.header { background: linear-gradient(135deg, #003d82 0%, #0066cc 100%); color: white; padding: 30px 20px; text-align: center; border-radius: 8px 8px 0 0; margin-bottom: 20px; }
+.header h1 { margin: 0; font-size: 28px; }
+.header p { margin: 10px 0 0 0; opacity: 0.9; }
+</style>
+</head>
+<body>
+<div class="payment-container">
+  <div class="header">
+    <h1>Complete Your Booking</h1>
+    <p>Panama Canal Tours</p>
+  </div>
+
+  <!-- Booking Summary -->
+  <div class="booking-summary">
+    <h2>Booking Summary</h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Price Per Person</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="bookingSummary">
+        <tr>
+          <td>Adults: <strong id="adultsCount">0</strong></td>
+          <td id="adultsPrice">$0.00</td>
+          <td id="adultsSubtotal">$0.00</td>
+        </tr>
+        <tr>
+          <td>Children 3-12 years: <strong id="childrenCount">0</strong></td>
+          <td id="childrenPrice">$0.00</td>
+          <td id="childrenSubtotal">$0.00</td>
+        </tr>
+        <tr>
+          <td>Children 0-2 years: <strong id="infantsCount">0</strong></td>
+          <td id="infantsPrice">$0.00</td>
+          <td id="infantsSubtotal">$0.00</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2">Total</td>
+          <td id="totalAmount">$0.00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-info">
+      <strong>Date:</strong> <span id="bookingDate">Not selected</span><br>
+      <strong>Location:</strong> Flamenco Marina, Amador, Panama City<br>
+      <strong>Duration:</strong> 6 hours
+    </div>
+  </div>
+
+  <!-- Payment Methods -->
+  <div class="payment-methods">
+    <h3>Select Payment Method</h3>
+    <div class="payment-buttons">
+      <button class="payment-btn active" onclick="selectPaymentMethod('visa')">💳 Visa/Mastercard</button>
+      <button class="payment-btn inactive" onclick="showUnavailable()">🅿️ PayPal</button>
+      <button class="payment-btn inactive" onclick="showUnavailable()">₮ Tether (USDT)</button>
+      <button class="payment-btn inactive" onclick="showUnavailable()">💵 USD Coin (USDC)</button>
+      <button class="payment-btn inactive" onclick="showUnavailable()">📱 Yappy</button>
+    </div>
+  </div>
+
+  <!-- Visa/Mastercard Payment Form -->
+  <div class="payment-form active" id="visaForm">
+    <h3>Card Payment Details</h3>
+    
+    <div class="alert alert-warning">
+      <strong>Important:</strong> The cardholder must be the person who makes the purchase or reservation and must participate in its use, either individually or as part of a group.
+    </div>
+
+    <form id="paymentFormVisa" onsubmit="submitPayment(event)">
+      <!-- Contact Details -->
+      <h4>Contact Details</h4>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+
+      <!-- Billing Address -->
+      <h4>Billing Address</h4>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country *</label>
+          <select id="country" name="country" required>
+            <option value="">-- Select Country --</option>
+            <option value="Panama">Panama</option>
+            <option value="USA">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="city">City *</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address *</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <h4>Card Details</h4>
+      <div class="form-group">
+        <label for="cardNumber">Card Number *</label>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expMonth">Expiration Month *</label>
+          <select id="expMonth" name="expMonth" required>
+            <option value="">-- Month --</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="expYear">Expiration Year *</label>
+          <select id="expYear" name="expYear" required>
+            <option value="">-- Year --</option>
+            <option value="26">2026</option>
+            <option value="27">2027</option>
+            <option value="28">2028</option>
+            <option value="29">2029</option>
+            <option value="30">2030</option>
+            <option value="31">2031</option>
+            <option value="32">2032</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV *</label>
+          <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="agreement" required> I agree to the Terms & Conditions
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">Complete Payment - $<span id="totalForSubmit">0.00</span></button>
+    </form>
+  </div>
+</div>
+
+<script>
+// Get booking data from URL parameters
+function getUrlParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// Initialize page with booking data
+function initializeBooking() {
+  const adults = parseInt(getUrlParam('pax_regular')) || 0;
+  const children = parseInt(getUrlParam('pax_discount')) || 0;
+  const infants = parseInt(getUrlParam('pax_free')) || 0;
+  const bookingDate = getUrlParam('booking_date') || 'Not selected';
+
+  // Prices
+  const adultPrice = 180;
+  const childPrice = 125;
+  const infantPrice = 0;
+
+  // Update summary
+  document.getElementById('adultsCount').textContent = adults;
+  document.getElementById('childrenCount').textContent = children;
+  document.getElementById('infantsCount').textContent = infants;
+  
+  document.getElementById('adultsPrice').textContent = '$' + adultPrice.toFixed(2);
+  document.getElementById('childrenPrice').textContent = '$' + childPrice.toFixed(2);
+  document.getElementById('infantsPrice').textContent = '$' + infantPrice.toFixed(2);
+
+  const adultsSubtotal = adults * adultPrice;
+  const childrenSubtotal = children * childPrice;
+  const infantsSubtotal = infants * infantPrice;
+  const total = adultsSubtotal + childrenSubtotal + infantsSubtotal;
+
+  document.getElementById('adultsSubtotal').textContent = '$' + adultsSubtotal.toFixed(2);
+  document.getElementById('childrenSubtotal').textContent = '$' + childrenSubtotal.toFixed(2);
+  document.getElementById('infantsSubtotal').textContent = '$' + infantsSubtotal.toFixed(2);
+  document.getElementById('totalAmount').textContent = '$' + total.toFixed(2);
+  document.getElementById('totalForSubmit').textContent = total.toFixed(2);
+
+  // Format date
+  const dateObj = new Date(bookingDate);
+  const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('bookingDate').textContent = formattedDate;
+}
+
+// Select payment method
+function selectPaymentMethod(method) {
+  if (method === 'visa') {
+    document.getElementById('visaForm').classList.add('active');
+    // Update button states
+    document.querySelectorAll('.payment-btn').forEach(btn => {
+      btn.classList.remove('active');
+      btn.classList.add('inactive');
+    });
+    document.querySelectorAll('.payment-btn')[0].classList.add('active');
+    document.querySelectorAll('.payment-btn')[0].classList.remove('inactive');
+  }
+}
+
+// Show unavailable message
+function showUnavailable() {
+  alert('This payment method is not available at the moment. Please use Visa/Mastercard.');
+}
+
+// Format card number with spaces
+document.addEventListener('DOMContentLoaded', function() {
+  initializeBooking();
+  
+  const cardInput = document.getElementById('cardNumber');
+  if (cardInput) {
+    cardInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s/g, '');
+      let formattedValue = value.replace(/(\d{4})/g, '$1 ').trim();
+      e.target.value = formattedValue;
+    });
+  }
+});
+
+// Submit payment
+function submitPayment(event) {
+  event.preventDefault();
+  
+  // Get form data
+  const formData = {
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    country: document.getElementById('country').value,
+    city: document.getElementById('city').value,
+    address: document.getElementById('address').value,
+    cardNumber: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+    expMonth: document.getElementById('expMonth').value,
+    expYear: document.getElementById('expYear').value,
+    cvv: document.getElementById('cvv').value,
+    bookingDate: getUrlParam('booking_date'),
+    paxRegular: getUrlParam('pax_regular'),
+    paxDiscount: getUrlParam('pax_discount'),
+    paxFree: getUrlParam('pax_free')
+  };
+
+  // Log for testing (in real scenario, this would be sent to server)
+  console.log('Payment Data:', formData);
+  
+  // Show success message
+  alert('Thank you for your booking! Your payment has been processed successfully.\n\nBooking Reference: ' + Math.random().toString(36).substr(2, 9).toUpperCase() + '\n\nYou will receive a confirmation email shortly.');
+  
+  // Redirect to confirmation page
+  setTimeout(() => {
+    window.location.href = '../payment-confirmation.html?ref=' + Math.random().toString(36).substr(2, 9).toUpperCase();
+  }, 2000);
+}
+</script>
+</body>
+</html>
