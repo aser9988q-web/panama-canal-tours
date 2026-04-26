@@ -1,0 +1,234 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+@media screen and (min-width: 1024px)	
+{
+	.tp_grid .tp_brief .tp_starting_at
+	{
+		float: right;
+	}
+	.tp_grid .tp_brief .tp_duration
+	{
+		float: left;
+	}
+
+}
+form#dy_package_filter_form
+{
+	padding: 20px 20px 0 20px !important; 
+}
+form#dy_package_filter_form button 
+{
+	height: 34px !important;
+}
+.dy_package_booking_form_container
+{
+	margin-bottom: 20px;
+}
+.dy_package_booking_form_container p {
+	margin: 0 0 20px 0;
+}
+.dy_package_booking_form_container>form.dy_package_booking_form
+{
+	margin-bottom: 0 !important;
+}
+ul#booking_sidebar > .widget-title,  ul#booking-sidebar > .widget-title
+ {
+	 font-weight: 800;
+ }
+ul.dy-list
+ {
+	 padding: 0;
+	 list-style: none;
+ }
+fieldset.package_terms_conditions
+{
+	border: 1px solid rgba(0,0,0,0.3);
+	padding: 10px;
+	margin: 0 0 20px 0;
+}
+fieldset.package_terms_conditions > label > span
+{
+	margin: 0 4px;
+}
+#dynamic_participants, #dynamic_table
+{
+	margin: 0 0 20px 0;
+}
+.dy_thumbnail
+{
+	line-height: 0;
+}
+.dy_event_date_class
+{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.6);
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+	text-transform: uppercase;
+	font-weight: 900;
+	padding: 5px 10px;
+	display: inline-block;
+	line-height: 1;
+}
+
+.dy_badge_class{
+	position: absolute;
+	text-align: center;
+	color: #f0f0f0;
+	top: 0;
+	right: 0;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+	font-weight: 900;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	display: inline-block;
+	line-height: 1;
+}
+
+.dy_badge_class.white{background: rgba(255,255,255,.8); color: #000; text-shadow: 1px 1px 1px rgb(255, 255, 255, 0.5)}
+.dy_badge_class.yellow{background: rgba(238, 204, 0, .8); color: #000; text-shadow: 1px 1px 1px rgb(255, 255, 255, 0.5)}
+.dy_badge_class.black{background: rgba(0, 0, 0, 0.6);}
+.dy_badge_class.grey{background: rgba(100, 100, 100, .8);}
+.dy_badge_class.blue{background: rgba(51, 153, 221, .8);}
+.dy_badge_class.green{background: rgba(34, 204, 119, .8);}
+.dy_badge_class.turquoise{background: rgba(17, 187, 153,.8);}
+.dy_badge_class.purple{background: rgba(153, 85, 187, .8);}
+.dy_badge_class.red{background: rgba(238, 68, 51, .8);}
+.dy_badge_class.orange{background: rgba(238, 136, 34, .8);}
+
+ul.tax_list > li.cat-item  > ul.children
+{
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+.tax-package_terms_conditions article
+{
+	background-color: #fff;
+	padding: 40px;
+	color: #000;
+}
+.dy_pad
+{
+	padding: 5px;
+}
+.dy_package
+{
+	padding: 10px;
+	max-width: 350px;
+	margin: 0 auto;
+}
+.dy_package, .dy_pad
+{
+	background-color: rgba(0,0,0,0.02);
+}
+.grecaptcha-badge
+{
+	margin: 0 0 20px 0;
+}
+
+.dy_archive
+{
+	max-width: 1600px;
+	margin: 0 auto;
+}
+.table-vertical-responsive
+{
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+.checkmark-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkmark-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border: 1px solid #888;
+}
+
+.checkmark-container:not(.invalid_checkmark):hover input ~ .checkmark {
+  background-color: #888;
+  border-color: #888;
+}
+
+.checkmark-container.invalid_checkmark input:not(:checked) ~ .checkmark {
+  background-color: #c45252;
+  border-color: #262626;
+}
+
+.checkmark-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+  border-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkmark-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkmark-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.minimal-box > .container 
+{
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.dy_calc:not(.animate)
+{
+	background-color: transparent;
+}
+.dy_calc.animate
+{
+	transition: background-color 1s ease;
+	background-color: #ccc;
+}
+
+#dy_payment_buttons .pure-button img{
+	display: inline-block;
+	vertical-align: -0.125em;
+	overflow: visible;
+	height: 1em;
+}
